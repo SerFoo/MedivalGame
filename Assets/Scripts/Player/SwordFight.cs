@@ -7,6 +7,8 @@ public class SwordFight : MonoBehaviour
 
     [Header("Controller KeyBind Settings")]
     public KeyCode guardButton;
+    public KeyCode lookButton;
+    public float visibilityRange = 150;
     public bool onGuard;
     
     Compass compass = new Compass();
@@ -19,11 +21,10 @@ public class SwordFight : MonoBehaviour
     void Update()
     {
         compass.setDirEnum();
-
+        #region GuardButton Stuff
         if(Input.GetKey(guardButton))
         {
             onGuard = true;
-            print("onGuard!");
         }
         else
         {
@@ -38,7 +39,34 @@ public class SwordFight : MonoBehaviour
         {
             compass.resetCompass();
         }
-
-
+        #endregion
+        if(Input.GetKeyDown(lookButton))
+            LockOnTarget(DetectNearestEnemy());
     }
+
+    public GameObject DetectNearestEnemy()
+    {
+        GameObject[] gos;
+        gos = GameObject.FindGameObjectsWithTag("NPC");
+        GameObject closest = null;
+        float distance = visibilityRange;
+        Vector3 position = transform.position;
+        foreach (GameObject go in gos)
+        {
+            Vector3 diff = go.transform.position - position;
+            float curDistance = diff.sqrMagnitude;
+            if (curDistance < distance)
+            {
+                closest = go;
+                distance = curDistance;
+            }
+        }
+        return closest;
+    }
+
+    public void LockOnTarget(GameObject target)
+    {
+            Debug.Log(target);
+    }
+
 }
