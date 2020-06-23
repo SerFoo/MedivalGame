@@ -28,7 +28,7 @@ public class Movement : MonoBehaviour
             moveDirection = this.transform.TransformDirection(moveDirection);
             moveDirection *= speed;
 
-            if (Input.GetButton("Jump"))
+            if (Input.GetKey(KeyCode.Joystick1Button0))
             {
                 moveDirection.y = jumpSpeed;
             }
