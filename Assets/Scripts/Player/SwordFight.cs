@@ -8,9 +8,11 @@ public class SwordFight : MonoBehaviour
     [Header("Controller KeyBind Settings")]
     public KeyCode guardButton;
     public KeyCode lookButton;
+    [Header("Fighting Settings")]
+    public float radius;
     public float visibilityRange = 150;
     public bool onGuard;
-    
+
     Compass compass = new Compass();
 
     void Start()
@@ -22,7 +24,7 @@ public class SwordFight : MonoBehaviour
     {
         compass.setDirEnum();
         #region GuardButton Stuff
-        if(Input.GetKey(guardButton))
+        if (Input.GetKey(guardButton))
         {
             onGuard = true;
         }
@@ -31,7 +33,7 @@ public class SwordFight : MonoBehaviour
             onGuard = false;
         }
 
-         if (onGuard)
+        if (onGuard)
         {
             compass.setCompass();
         }
@@ -40,33 +42,35 @@ public class SwordFight : MonoBehaviour
             compass.resetCompass();
         }
         #endregion
-        if(Input.GetKeyDown(lookButton))
+        if (Input.GetKeyDown(lookButton))
             LockOnTarget(DetectNearestEnemy());
     }
 
     public GameObject DetectNearestEnemy()
     {
-        GameObject[] gos;
-        gos = GameObject.FindGameObjectsWithTag("NPC");
-        GameObject closest = null;
-        float distance = visibilityRange;
-        Vector3 position = transform.position;
-        foreach (GameObject go in gos)
+        Debug.Log("Finding Enemy");
+
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, visibilityRange);
+
+        //Iterate through all npcs in area
+        foreach (Collider tr in hitColliders)
         {
-            Vector3 diff = go.transform.position - position;
-            float curDistance = diff.sqrMagnitude;
-            if (curDistance < distance)
+            if (Vector3.Distance(transform.position, tr.transform.position) < visibilityRange && tr.tag == "NPC")
             {
-                closest = go;
-                distance = curDistance;
+                Debug.Log(tr.gameObject);
+                return tr.gameObject;
             }
         }
-        return closest;
-    }
 
+        return null;
+    }
+    
     public void LockOnTarget(GameObject target)
     {
-            Debug.Log(target);
+        Debug.Log(target);
     }
 
 }
+
+
+
