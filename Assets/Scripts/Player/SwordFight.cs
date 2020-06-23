@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class SwordFight : MonoBehaviour
 {
-    // Start is called before the first frame update
+    Compass compass = new Compass();
+
     void Start()
     {
         
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        compass.setDirEnum();
     }
 }

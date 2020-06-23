@@ -23,7 +23,7 @@ public class Controller
     public float setOffsetDead;//Deadzone offset for diagnols
 }
 
-public class Compass : MonoBehaviour
+public class Compass : Controller  
 {    
     public Image north;
     public Image south;
@@ -34,15 +34,60 @@ public class Compass : MonoBehaviour
     public Image southeast;
     public Image southwest;
     public Image middle;
-    
-    void Start()
+
+
+    public void setDirEnum()
     {
-        
+
+        float h = Input.GetAxis("ControllerX");
+        float v = Input.GetAxis("ControllerY");
+
+        //South
+        if (v > setDead)
+        {
+            direction = Dir.Down;
+        }
+        //North
+        if (v < -setDead)
+        {
+            direction = Dir.Up;
+        }
+        //East
+        if (h > setDead)
+        {
+            direction = Dir.Right;
+        }
+        //West
+        if (h < -setDead)
+        {
+            direction = Dir.Left;
+        }
+        //NorthEast
+        if(h > (setDead - setOffsetDead) && v < (-setDead + setOffsetDead))
+        {
+            direction = Dir.UpRight;
+        }
+        //NorthWest
+        if(h < (-setDead + setOffsetDead) && v < (-setDead + setOffsetDead))
+        {
+            direction = Dir.UpLeft;
+        }
+        //SouthEast
+        if (h > (setDead - setOffsetDead) && v > (setDead - setOffsetDead))
+        {
+            direction = Dir.DownRight;
+        }
+        //SouthWest
+        if (h < (-setDead + setOffsetDead) && v >(setDead - setOffsetDead))
+        {
+            direction = Dir.DownLeft;
+        }
+        //Middle
+        if(h == 0 && v == 0)
+        {
+            direction = Dir.Middle;
+        }
+        Debug.Log(direction);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
