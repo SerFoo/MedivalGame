@@ -19,7 +19,7 @@ public class Controller
     }
 
     public Dir direction;
-    public float setDead = 0.5f; //Deadzone for when to decide to set the enum
+    public const float setDead = 0.5f; //Deadzone for when to decide to set the enum
     public float setOffsetDead;//Deadzone offset for diagnols
 }
 
@@ -39,8 +39,8 @@ public class Compass : Controller
     public void setDirEnum()
     {
 
-        float h = Input.GetAxis("ControllerX");
-        float v = Input.GetAxis("ControllerY");
+        float h = Input.GetAxisRaw("ControllerX");
+        float v = Input.GetAxisRaw("ControllerY");
 
         //South
         if (v > setDead)
@@ -62,6 +62,7 @@ public class Compass : Controller
         {
             direction = Dir.Left;
         }
+
         //NorthEast
         if(h > (setDead - setOffsetDead) && v < (-setDead + setOffsetDead))
         {
@@ -82,11 +83,13 @@ public class Compass : Controller
         {
             direction = Dir.DownLeft;
         }
+
         //Middle
         if(h == 0 && v == 0)
         {
             direction = Dir.Middle;
         }
+
         Debug.Log(direction);
     }
 
