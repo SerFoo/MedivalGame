@@ -64,7 +64,6 @@ public class SwordFight : MonoBehaviour
                 return tr.transform;
             }
         }
-
         return null;
     }
 }
