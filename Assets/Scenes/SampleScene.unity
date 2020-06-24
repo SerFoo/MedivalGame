@@ -250,8 +250,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   guardButton: 334
   lookButton: 339
+  radius: 0
   visibilityRange: 50
   onGuard: 0
+  lockonTarget: {fileID: 0}
+  isLocked: 0
 --- !u!114 &369982676
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -369,16 +372,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 369982674}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d315992eec7796d4a95b374003651210, type: 3}
+  m_Script: {fileID: 11500000, guid: 576ae32e5eac23e4baac0bd18254fc31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clampInDegrees: {x: 360, y: 120}
-  lockCursor: 0
-  sensitivity: {x: 2, y: 2}
-  smoothing: {x: 3, y: 3}
-  targetDirection: {x: 0, y: 0}
-  targetCharacterDirection: {x: 0, y: 0}
-  characterBody: {fileID: 0}
+  axes: 0
+  sensitivityX: 5
+  sensitivityY: 5
+  minimumX: -360
+  maximumX: 360
+  minimumY: -60
+  maximumY: 60
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0

@@ -30,6 +30,9 @@ public class MouseLook : MonoBehaviour
 
     void Update()
     {
+
+        bool locked = this.gameObject.GetComponent<SwordFight>().isLocked;
+
         // Ensure the cursor is always locked when set
         if (lockCursor)
         {
@@ -46,9 +49,14 @@ public class MouseLook : MonoBehaviour
         // Scale input against the sensitivity setting and multiply that against the smoothing value.
         mouseDelta = Vector2.Scale(mouseDelta, new Vector2(sensitivity.x * smoothing.x, sensitivity.y * smoothing.y));
 
+        //If player isnt locked onto a target
+        if(!locked)
+        {
         // Interpolate mouse movement over time to apply smoothing delta.
         _smoothMouse.x = Mathf.Lerp(_smoothMouse.x, mouseDelta.x, 1f / smoothing.x);
         _smoothMouse.y = Mathf.Lerp(_smoothMouse.y, mouseDelta.y, 1f / smoothing.y);
+        }
+
 
         // Find the absolute mouse movement value from point zero.
         _mouseAbsolute += _smoothMouse;

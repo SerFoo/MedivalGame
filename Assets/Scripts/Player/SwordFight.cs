@@ -9,9 +9,10 @@ public class SwordFight : MonoBehaviour
     public KeyCode guardButton;
     public KeyCode lookButton;
     [Header("Fighting Settings")]
-    public float radius;
     public float visibilityRange = 150;
     public bool onGuard;
+    public GameObject lockonTarget;
+    public bool isLocked;
 
     Compass compass = new Compass();
 
@@ -20,7 +21,7 @@ public class SwordFight : MonoBehaviour
         compass.CompassInit(GameObject.Find("Canvas"));
     }
 
-    void Update()
+    void FixedUpdate()
     {
         compass.setDirEnum();
         #region GuardButton Stuff
@@ -42,11 +43,12 @@ public class SwordFight : MonoBehaviour
             compass.resetCompass();
         }
         #endregion
-        if (Input.GetKeyDown(lookButton))
-            LockOnTarget(DetectNearestEnemy());
+        if(Input.GetKeyDown(lookButton))
+            isLocked = !isLocked;
+                
     }
 
-    public GameObject DetectNearestEnemy()
+    public Transform DetectNearestEnemy()
     {
         Debug.Log("Finding Enemy");
 
@@ -57,19 +59,14 @@ public class SwordFight : MonoBehaviour
         {
             if (Vector3.Distance(transform.position, tr.transform.position) < visibilityRange && tr.tag == "NPC")
             {
-                Debug.Log(tr.gameObject);
-                return tr.gameObject;
+                Debug.Log("Nearest Enemy: " + tr.gameObject);
+                lockonTarget = tr.gameObject;
+                return tr.transform;
             }
         }
 
         return null;
     }
-    
-    public void LockOnTarget(GameObject target)
-    {
-        Debug.Log(target);
-    }
-
 }
 
 
