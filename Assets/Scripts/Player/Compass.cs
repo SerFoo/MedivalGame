@@ -11,15 +11,11 @@ public class Controller
         Down,
         Left,
         Right,
-        UpLeft,//NorthWest
-        UpRight,//NorthEast
-        DownLeft,//SouthWest
-        DownRight,//SouthEast
-        Middle//Doing nothing/ joystick idle
+        Middle
     }
 
     public Dir direction;
-    public const float setDead = 0.05f; //Deadzone for when to decide to set the enum
+    public const float setDead = 0.2f; //Deadzone for when to decide to set the enum
     public float setOffsetDead = -0.05f;//Deadzone offset for diagnols
 }
 
@@ -29,10 +25,6 @@ public class Compass : Controller
     public Image south;
     public Image east;
     public Image west;
-    public Image northeast;
-    public Image northwest;
-    public Image southeast;
-    public Image southwest;
     public Image middle;
 
     
@@ -40,14 +32,10 @@ public class Compass : Controller
     {
         Transform compassObj = canvas.transform.GetChild(0).GetComponent<Transform>();
 
-        north = compassObj.GetChild(8).GetComponent<Image>();
-        south = compassObj.GetChild(7).GetComponent<Image>();
-        east = compassObj.GetChild(6).GetComponent<Image>();
-        west = compassObj.GetChild(5).GetComponent<Image>();
-        northeast = compassObj.GetChild(4).GetComponent<Image>();
-        northwest = compassObj.GetChild(3).GetComponent<Image>();
-        southwest = compassObj.GetChild(2).GetComponent<Image>();
-        southeast = compassObj.GetChild(1).GetComponent<Image>();
+        north = compassObj.GetChild(1).GetComponent<Image>();
+        south = compassObj.GetChild(2).GetComponent<Image>();
+        east = compassObj.GetChild(3).GetComponent<Image>();
+        west = compassObj.GetChild(4).GetComponent<Image>();
         middle = compassObj.GetChild(0).GetComponent<Image>();
         Debug.Log("Init");
     }
@@ -78,32 +66,11 @@ public class Compass : Controller
             direction = Dir.Left;
         }
 
-        //NorthEast
-        if (h > (setDead - setOffsetDead) && v < (-setDead + setOffsetDead))
-        {
-            direction = Dir.DownRight;
-        }
-        //NorthWest
-        if (h < (-setDead + setOffsetDead) && v < (-setDead + setOffsetDead))
-        {
-            direction = Dir.DownLeft;
-        }
-        //SouthEast
-        if (h > (setDead - setOffsetDead) && v > (setDead - setOffsetDead))
-        {
-            direction = Dir.UpRight;
-        }
-        //SouthWest
-        if (h < (-setDead + setOffsetDead) && v > (setDead - setOffsetDead))
-        {
-            direction = Dir.UpLeft;
-        }
-
         //Middle
-        if (h == 0 && v == 0)
+        /**if (h == 0 && v == 0)
         {
             direction = Dir.Middle;
-        }
+        }**/
 
     }
 
@@ -144,43 +111,6 @@ public class Compass : Controller
         {
             west.color = Color.white;
         }
-
-        if (direction == Dir.UpRight)
-        {
-            northeast.color = Color.red;
-        }
-        else
-        {
-            northeast.color = Color.white;
-        }
-
-        if (direction == Dir.UpLeft)
-        {
-            northwest.color = Color.red;
-        }
-        else
-        {
-            northwest.color = Color.white;
-        }
-
-        if (direction == Dir.DownRight)
-        {
-            southeast.color = Color.red;
-        }
-        else
-        {
-            southeast.color = Color.white;
-        }
-
-        if (direction == Dir.DownLeft)
-        {
-            southwest.color = Color.red;
-        }
-        else
-        {
-            southwest.color = Color.white;
-        }
-
         if (direction == Dir.Middle)
         {
             middle.color = Color.red;
@@ -196,10 +126,6 @@ public class Compass : Controller
         south.color = Color.white;
         east.color = Color.white;
         west.color = Color.white;
-        northeast.color = Color.white;
-        northwest.color = Color.white;
-        southeast.color = Color.white;
-        southwest.color = Color.white;
         middle.color = Color.red;
     }
 

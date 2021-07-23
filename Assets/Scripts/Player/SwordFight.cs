@@ -8,7 +8,6 @@ public class SwordFight : MonoBehaviour
     [Header("Controller KeyBind Settings")]
     public KeyCode guardButton;
     [Header("Fighting Settings")]
-    public float visibilityRange = 150;
     public bool onGuard;
 
     Compass compass = new Compass();
