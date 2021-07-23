@@ -27,9 +27,6 @@ public class Look : MonoBehaviour
 
     void Update()
     {
-		SwordFight sf = this.gameObject.GetComponent<SwordFight>();
-		bool locked = sf.isLocked;
-
         // Read the mouse input axis
         rotationX += Input.GetAxis("Mouse X") * sensitivityX;
         rotationY += Input.GetAxis("Mouse Y") * sensitivityY;
@@ -40,13 +37,7 @@ public class Look : MonoBehaviour
         Quaternion xQuaternion = Quaternion.AngleAxis(rotationX, Vector3.up);
         Quaternion yQuaternion = Quaternion.AngleAxis(rotationY, Vector3.left);
 
-		if(!locked)
-        	transform.localRotation = originalRotation * xQuaternion * yQuaternion;
-		else
-			transform.LookAt(new Vector3(sf.DetectNearestEnemy().position.x, sf.DetectNearestEnemy().position.y - transform.position.y, sf.DetectNearestEnemy().position.z));
-			Debug.Log("PogChamp");
-        	//transform.localRotation = originalRotation * xQuaternion * yQuaternion;
-
+        transform.localRotation = originalRotation * xQuaternion * yQuaternion;
     }
 
 

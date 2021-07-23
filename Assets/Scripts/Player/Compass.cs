@@ -105,7 +105,6 @@ public class Compass : Controller
             direction = Dir.Middle;
         }
 
-        Debug.Log(direction);
     }
 
     public void setCompass()
