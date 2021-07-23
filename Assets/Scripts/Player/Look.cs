@@ -31,8 +31,8 @@ public class Look : MonoBehaviour
 		bool locked = sf.isLocked;
 
         // Read the mouse input axis
-        rotationX += Input.GetAxis("ControllerX") * sensitivityX;
-        rotationY += -Input.GetAxis("ControllerY") * sensitivityY;
+        rotationX += Input.GetAxis("Mouse X") * sensitivityX;
+        rotationY += Input.GetAxis("Mouse Y") * sensitivityY;
 
         rotationX = ClampAngle(rotationX, minimumX, maximumX);
         rotationY = ClampAngle(rotationY, minimumY, maximumY);

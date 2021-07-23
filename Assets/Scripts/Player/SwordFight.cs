@@ -52,12 +52,12 @@ public class SwordFight : MonoBehaviour
     {
         Debug.Log("Finding Enemy");
 
-        Collider[] hitColliders = Physics.OverlapSphere(transform.position, visibilityRange);
+        Collider[] hitColliders = Physics.OverlapSphere(this.transform.position, visibilityRange);
 
         //Iterate through all npcs in area
         foreach (Collider tr in hitColliders)
         {
-            if (Vector3.Distance(transform.position, tr.transform.position) < visibilityRange && tr.tag == "NPC")
+            if (Vector3.Distance(this.transform.position, tr.transform.position) < visibilityRange && tr.tag == "NPC")
             {
                 Debug.Log("Nearest Enemy: " + tr.gameObject);
                 lockonTarget = tr.gameObject;

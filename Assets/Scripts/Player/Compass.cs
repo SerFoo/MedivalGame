@@ -19,8 +19,8 @@ public class Controller
     }
 
     public Dir direction;
-    public const float setDead = 0.5f; //Deadzone for when to decide to set the enum
-    public float setOffsetDead;//Deadzone offset for diagnols
+    public const float setDead = 0.05f; //Deadzone for when to decide to set the enum
+    public float setOffsetDead = -0.05f;//Deadzone offset for diagnols
 }
 
 public class Compass : Controller
@@ -35,7 +35,7 @@ public class Compass : Controller
     public Image southwest;
     public Image middle;
 
-    //We need the canvas so 
+    
     public void CompassInit(GameObject canvas)
     {
         Transform compassObj = canvas.transform.GetChild(0).GetComponent<Transform>();
@@ -54,18 +54,18 @@ public class Compass : Controller
     public void setDirEnum()
     {
 
-        float h = Input.GetAxisRaw("ControllerX");
-        float v = Input.GetAxisRaw("ControllerY");
+        float h = Input.GetAxisRaw("Mouse X");
+        float v = Input.GetAxisRaw("Mouse Y");
 
-        //South
+        //North
         if (v > setDead)
         {
-            direction = Dir.Down;
+            direction = Dir.Up;
         }
         //North
         if (v < -setDead)
         {
-            direction = Dir.Up;
+            direction = Dir.Down;
         }
         //East
         if (h > setDead)
@@ -81,22 +81,22 @@ public class Compass : Controller
         //NorthEast
         if (h > (setDead - setOffsetDead) && v < (-setDead + setOffsetDead))
         {
-            direction = Dir.UpRight;
+            direction = Dir.DownRight;
         }
         //NorthWest
         if (h < (-setDead + setOffsetDead) && v < (-setDead + setOffsetDead))
         {
-            direction = Dir.UpLeft;
+            direction = Dir.DownLeft;
         }
         //SouthEast
         if (h > (setDead - setOffsetDead) && v > (setDead - setOffsetDead))
         {
-            direction = Dir.DownRight;
+            direction = Dir.UpRight;
         }
         //SouthWest
         if (h < (-setDead + setOffsetDead) && v > (setDead - setOffsetDead))
         {
-            direction = Dir.DownLeft;
+            direction = Dir.UpLeft;
         }
 
         //Middle
