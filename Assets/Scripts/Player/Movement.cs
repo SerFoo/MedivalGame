@@ -5,7 +5,7 @@ using UnityEngine;
 public class Movement : MonoBehaviour
 {
     CharacterController characterController;
-
+    public KeyCode JumpButton;
     public float speed = 6.0f;
     public float jumpSpeed = 8.0f;
     public float gravity = 20.0f;
@@ -28,7 +28,7 @@ public class Movement : MonoBehaviour
             moveDirection = this.transform.TransformDirection(moveDirection);
             moveDirection *= speed;
 
-            if (Input.GetKey(KeyCode.Joystick1Button0))
+            if (Input.GetKeyDown(JumpButton))
             {
                 moveDirection.y = jumpSpeed;
             }
