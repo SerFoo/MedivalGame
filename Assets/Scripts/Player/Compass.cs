@@ -15,7 +15,7 @@ public class Controller
     }
 
     public Dir direction;
-    public const float setDead = 0.2f; //Deadzone for when to decide to set the enum
+    public const float setDead = 0.1f; //Deadzone for when to decide to set the enum
     public float setOffsetDead = -0.05f;//Deadzone offset for diagnols
 }
 

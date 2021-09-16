@@ -16,13 +16,14 @@ public class Look : MonoBehaviour
 
     float rotationX = 0F;
     float rotationY = 0F;
-
+    bool lockCursor;
     Quaternion originalRotation;
 
 
     void Start()
     {
         originalRotation = transform.localRotation;
+        lockCursor = true;
     }
 
     void Update()
@@ -38,6 +39,12 @@ public class Look : MonoBehaviour
         Quaternion yQuaternion = Quaternion.AngleAxis(rotationY, Vector3.left);
 
         transform.localRotation = originalRotation * xQuaternion * yQuaternion;
+
+        //Cursor Lock
+        if(lockCursor)
+            Cursor.lockState = CursorLockMode.Locked;
+        else
+            Cursor.lockState = CursorLockMode.None;
     }
 
 
