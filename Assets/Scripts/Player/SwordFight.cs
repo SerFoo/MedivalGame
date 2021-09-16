@@ -32,6 +32,7 @@ public class SwordFight : MonoBehaviour
 
         if (onGuard)
         {
+            compass.Fadein();
             compass.setCompass();
         }
         else

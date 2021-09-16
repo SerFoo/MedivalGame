@@ -74,8 +74,17 @@ public class Compass : Controller
 
     }
 
+
+    public void Fadein()
+    {
+        north.CrossFadeAlpha(255, 1, false);
+        south.CrossFadeAlpha(255, 1, false);
+        east.CrossFadeAlpha(255, 1, false);
+        west.CrossFadeAlpha(255, 1, false);
+    }
     public void setCompass()
     {
+        
         if (direction == Dir.Up)
         {
             north.color = Color.red;
@@ -111,17 +120,15 @@ public class Compass : Controller
         {
             west.color = Color.white;
         }
-        if (direction == Dir.Middle)
-        {
-            middle.color = Color.red;
-        }
-        else
-        {
-            middle.color = Color.white;
-        }
+
     }
     public void resetCompass()
     {
+        north.CrossFadeAlpha(0, 1, false);
+        south.CrossFadeAlpha(0, 1, false);
+        east.CrossFadeAlpha(0, 1, false);
+        west.CrossFadeAlpha(0, 1, false);
+        
         north.color = Color.white;
         south.color = Color.white;
         east.color = Color.white;
